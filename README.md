@@ -52,7 +52,7 @@ or you can use curl:
 
 ```Bash
 aljaz@abMint:~# curl -I http://127.0.0.1/ping
-HTTP/1.1 200 O
+HTTP/1.1 200 OK
 Server: nginx/1.21.6
 Date: Sun, 28 Aug 2022 10:53:54 GMT
 Content-Type: text/html; charset=utf-8
