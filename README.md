@@ -68,7 +68,8 @@ For local setup every commit build new image.
 Cloud setup:  
 For deploying images i would use docker registry. So every merge or commit into master should trigger jenkins webhook to build image and push it to registry ( step 1 ) I have made 2 jobs, backend-build and backend-build-deploy  
 Step 2 is to trigger pull image and restart it on cloud solution. ( via api, webhooks .... )  
-  
+At the end of every build i run post task to start image and test curl output. 
+
 For example i use jenkins webhooks to do this in my case.  
   
 Example jenkins pipeline for image build.
@@ -94,3 +95,8 @@ sh 'docker rmi $dockerImage":$BUILD_NUMBER"'
 }
 }
 ```
+
+To have high availability system i would use haproxy ( or some other cloud load balacner ) on top of my backend servers ( see example config in git ). Haproxy config can be edited in mounted shared storage or via haproxy api.  
+So my setup would look like this:  
+On google cloud provider i would set up kuberenets cluster for managing apps. For cpu load i would use auto-scale options in workload area. To manage cointainers i would setup Google container registry ( gcr ) so i can use my own images in cloud and push it from jenkins build ...   
+For networking i would use isolated network for containers and only expose haproxy or some loadbalancer port.
