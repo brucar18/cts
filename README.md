@@ -70,6 +70,11 @@ For deploying images i would use docker registry. So every merge or commit into 
 Step 2 is to trigger pull image and restart it on cloud solution. ( via api, webhooks .... )  
 At the end of every build i run post task to start image and test curl output. 
 
+```Bash
+curl 127.0.0.1/ping | grep OK 
+#if response ok test done
+```
+
 For example i use jenkins webhooks to do this in my case.  
   
 Example jenkins pipeline for image build.
