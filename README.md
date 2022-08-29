@@ -71,8 +71,10 @@ Step 2 is to trigger pull image and restart it on cloud solution. ( via api, web
 At the end of every build i run post task to start image and test curl output. 
 
 ```Bash
-curl 127.0.0.1/ping | grep OK 
-#if response ok test done
+docker run -d -p 80:80 --name backend_test backend
+curl http://backend_test/ping | grep OK 
+#if response ok test done and stop conatainer else do not push to registry and send error.
+
 ```
 
 For example i use jenkins webhooks to do this in my case.  
